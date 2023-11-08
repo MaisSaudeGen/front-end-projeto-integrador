@@ -19,8 +19,8 @@ function Home() {
 
           <div className="pt-6">
             <ul className="flex gap-4">
-            <li><Link to="/" className="bg-lime-200  hover:bg-lime-500 hover:text-black rounded px-4 py-[0.2rem]">Login</Link></li>
-            <li><Link to="/Cadastrar" className="bg-lime-200  hover:bg-lime-500 hover:text-black rounded px-4 py-[0.2rem]">Cadastrar</Link></li>
+            <li><Link to="/login" className="bg-lime-200  hover:bg-lime-500 hover:text-black rounded px-4 py-[0.2rem]">Login</Link></li>
+            <li><Link to="/cadastrar" className="bg-lime-200  hover:bg-lime-500 hover:text-black rounded px-4 py-[0.2rem]">Cadastrar</Link></li>
             </ul>
           </div>
         </div>
