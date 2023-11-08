@@ -63,7 +63,7 @@ function Cadastrar() {
             ></input>
           </div>
 
-          <div className="mt-6 text-white bg-orange-700 p-3 rounded-md hoover:bg-orange-500">
+          <div className="mt-6 text-white bg-green-700 p-3 rounded-md hoover:bg-orange-500">
             <button>Cadastrar</button>
           </div>
         </form>
