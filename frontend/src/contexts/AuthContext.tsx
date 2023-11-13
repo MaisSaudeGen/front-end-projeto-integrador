@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 interface AuthContextProps {
     usuario: UsuarioLogin
     handleLogout(): void
-    handleLogin(usuario: UsuarioLogin): Promise<void>
+    handleLogin(usuario: {usuario: string, senha:string} ): Promise<void>
     isLoading: boolean
 }
 
@@ -19,7 +19,7 @@ export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const navigate = useNavigate()
+   
 
     const [usuario, setUsuario] = useState<UsuarioLogin>({
         id: 0,
@@ -30,6 +30,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         token: ""
     })
 
+    
+
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleLogin(userLogin: UsuarioLogin) {
@@ -38,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             await login(`/usuarios/logar`, userLogin, setUsuario)
             alert("Usuário logado com sucesso")
             setIsLoading(false)
-            navigate ("/sobre")
+            
         } catch (error) {
             console.log(error)
             alert("Dados do usuário inconsistentes")

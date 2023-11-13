@@ -4,25 +4,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import UsuarioLogin from '../../model/UsuarioLogin';
 import { RotatingLines } from 'react-loader-spinner';
+import Cadastrar from '../cadastro/Cadastrar';
 
 
 export default function Login(){
 
   let navigate = useNavigate();
 
-  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
-    {} as UsuarioLogin
-  );
+  // const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
+  //   {} as UsuarioLogin
+  // );
 
+  const [usuarioLogin, setUsuarioLogin] = useState({usuario:"", senha:""})
   const { usuario, handleLogin } = useContext(AuthContext);
 
   const {isLoading} = useContext(AuthContext) 
 
   useEffect(() => {
-    if (usuario && usuario.token !== "") {
+    if (usuario.token !== "") {
         navigate('/sobre')
     }
-}, [usuario])
+}, [usuario.token])
 
 function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
   setUsuarioLogin({
@@ -32,7 +34,11 @@ function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
 }
 
 function login(e: ChangeEvent<HTMLFormElement>) {
+
   e.preventDefault()
+
+  console.log (usuarioLogin)
+
   handleLogin(usuarioLogin)
 }
 
@@ -50,14 +56,14 @@ function login(e: ChangeEvent<HTMLFormElement>) {
           </h2>
 
           <div className="flex flex-col  mb-2">
-            <label className="text-white text-lg" htmlFor="email">
+            <label className="text-white text-lg" htmlFor="usuario">
               Email
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
+              type="usuario"
+              id="usuario"
+              name="usuario"
+              placeholder="email"
               className="rounded-md p-1"
               value={usuarioLogin.usuario} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -82,7 +88,7 @@ function login(e: ChangeEvent<HTMLFormElement>) {
           <div>
            
             <button type='submit' className="mx-3 mt-6 text-white bg-green-700 p-3 rounded-md hoover:bg-orange-500" >Entrar</button >
-            <button  className="mx-3 mt-6 text-white p-3 rounded-md hoover:bg-orange-500 border">Esqueci a senha
+            <button onClick={()=>{navigate("/cadastrar")}} className="mx-3 mt-6 text-white p-3 rounded-md hoover:bg-orange-500 border">Cadastre-se
             </button>
           </div>
         </form>

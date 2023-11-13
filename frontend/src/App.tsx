@@ -7,21 +7,25 @@ import Cadastrar from "./pages/cadastro/Cadastrar";
 import Login from "./pages/login/Login";
 import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
+import { AuthContext, AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-indigo-600">
+      <AuthProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cadastrar" element={<Cadastrar />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
