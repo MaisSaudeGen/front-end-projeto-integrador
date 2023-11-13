@@ -1,10 +1,47 @@
 import loginImg from '../../../public/images/login/login.jpg';
+import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import UsuarioLogin from '../../model/UsuarioLogin';
+import { RotatingLines } from 'react-loader-spinner';
+
 
 export default function Login(){
+
+  let navigate = useNavigate();
+
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
+    {} as UsuarioLogin
+  );
+
+  const { usuario, handleLogin } = useContext(AuthContext);
+
+  const {isLoading} = useContext(AuthContext) 
+
+  useEffect(() => {
+    if (usuario && usuario.token !== "") {
+        navigate('/sobre')
+    }
+}, [usuario])
+
+function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  setUsuarioLogin({
+      ...usuarioLogin,
+      [e.target.name]: e.target.value
+  })
+}
+
+function login(e: ChangeEvent<HTMLFormElement>) {
+  e.preventDefault()
+  handleLogin(usuarioLogin)
+}
+
+
   return (
     <div className="flex grow justify-center items-center bg-green-500">
       <div className="flex justify-center flex-row-reverse">
         <form
+          onSubmit={login}
           className="flex 
           flex-col  justify-center items-center bg-blue-900 p-10 rounded-lg drop-shadow-lg"
         >
@@ -22,6 +59,8 @@ export default function Login(){
               name="email"
               placeholder="Email"
               className="rounded-md p-1"
+              value={usuarioLogin.usuario} 
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             ></input>
           </div>
 
@@ -35,12 +74,16 @@ export default function Login(){
               name="senha"
               placeholder="Senha"
               className="rounded-md p-1"
+              value={usuarioLogin.senha} 
+              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             ></input>
           </div>
 
           <div>
-            <button className="mx-3 mt-6 text-white bg-green-700 p-3 rounded-md hoover:bg-orange-500">Entrar</button>
-            <button className="mx-3 mt-6 text-white p-3 rounded-md hoover:bg-orange-500 border">Esqueci a senha</button>
+           
+            <button type='submit' className="mx-3 mt-6 text-white bg-green-700 p-3 rounded-md hoover:bg-orange-500" >Entrar</button >
+            <button  className="mx-3 mt-6 text-white p-3 rounded-md hoover:bg-orange-500 border">Esqueci a senha
+            </button>
           </div>
         </form>
         <div className="max-w-[50%] ">
