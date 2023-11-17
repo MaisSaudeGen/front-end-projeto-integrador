@@ -9,24 +9,27 @@ import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
 import { AuthContext, AuthProvider } from "./contexts/AuthContext";
 import ListaPostagens from "./components/postagens/listaPostagens/ListaPostagens";
+import FormularioPostagem from "./components/postagens/formularioPostagem/FormularioPostagem";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-indigo-600">
       <AuthProvider>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastrar" element={<Cadastrar />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Login />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/*" element={<NotFound />} />
-          <Route path="/postagens" element={<ListaPostagens />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastrar" element={<Cadastrar />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Login />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/*" element={<NotFound />} />
+            <Route path="/postagens" element={<ListaPostagens />} />
+            <Route path="/cadastroPostagem" element={<FormularioPostagem />} />
+            <Route path="/editarPostagem/:id" element={<FormularioPostagem />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
       </AuthProvider>
     </div>
   );
