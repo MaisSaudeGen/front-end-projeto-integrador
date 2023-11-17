@@ -1,4 +1,4 @@
-import sobreImg from '../../../public/images/sobre/building.jpg';
+import sobreImg from '../../assets/images/sobre/building.jpg';
 
 export default function Sobre() {
   return (
