@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-principal-900 {
+    background-color: #7400B8;
+  }
+  .bg-principal-800{
+    background-color: #6930C3;
+  }
+  .bg-principal-700 {
+    background-color: #5E60CE;
+  }
+  .bg-principal-600 {
+    background-color: #5390D9;
+  }
+  .bg-principal-500 {
+    background-color: #4EA8DE;
+  }
+  .bg-secundário-900 {
+    background-color: #48BFE3;
+  }
+  .bg-secundário-800{
+    background-color: #56CFE1;
+  }
+  .bg-secundário-700 {
+    background-color: #64DFDF;
+  }
+  .bg-secundário-600 {
+    background-color: #72EFDD;
+  }
+  .bg-secundário-500 {
+    background-color: #80FFDB;
+  }
+}
+/* Link para a paleta utilizada abaixo. */
+/* https://coolors.co/palette/7400b8-6930c3-5e60ce-5390d9-4ea8de-48bfe3-56cfe1-64dfdf-72efdd-80ffdb */
+
+
+body {
+ -webkit-font-smoothing: antialiased; 
+}
