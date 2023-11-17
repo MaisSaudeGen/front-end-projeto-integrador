@@ -2,12 +2,12 @@ import {createContext, ReactNode, useState } from "react"
 
 import UsuarioLogin from "../model/UsuarioLogin"
 import {login} from "../services/Services"
-import { Navigate, useNavigate } from "react-router-dom"
+import { AxiosError } from "axios"
 
 interface AuthContextProps {
     usuario: UsuarioLogin
     handleLogout(): void
-    handleLogin(usuario: {usuario: string, senha:string} ): Promise<void>
+    handleLogin(usuario: {usuario: string, senha:string} ): Promise<string>
     isLoading: boolean
 }
 
@@ -38,13 +38,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setIsLoading(true)
         try {
             await login(`/usuarios/logar`, userLogin, setUsuario)
-            alert("Usuário logado com sucesso")
             setIsLoading(false)
+            return "200"
             
         } catch (error) {
-            console.log(error)
-            alert("Dados do usuário inconsistentes")
-            setIsLoading(false)
+            if (error instanceof AxiosError){
+                setIsLoading(false)
+                return error.message
+            }
+            return error
         }
     }
 
