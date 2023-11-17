@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
 import { AuthContext, AuthProvider } from "./contexts/AuthContext";
+import ListaPostagens from "./components/postagens/listaPostagens/ListaPostagens";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/logout" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/*" element={<NotFound />} />
+          <Route path="/postagens" element={<ListaPostagens />} />
         </Routes>
         <Footer />
       </BrowserRouter>

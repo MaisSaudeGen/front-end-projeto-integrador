@@ -10,10 +10,9 @@ function Header () {
                 <nav >
                     <ul className="flex gap-4">
                         <li><Link to="/" className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]">Home</Link></li>
-                        <li><Link to="/login" className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]">Login</Link></li>
-                        <li><Link to="/cadastrar" className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]">Cadastrar</Link></li>
                         <li><Link to="/sobre" className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]">Sobre</Link></li>
                         <li><Link to="/" className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]">Sair</Link></li>
+                        <Link to='/postagens' className='hover:underline'>Postagens</Link>
                     </ul>
                 </nav>
             </div>
