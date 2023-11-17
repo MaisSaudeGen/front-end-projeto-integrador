@@ -7,13 +7,17 @@ import Cadastrar from "./pages/cadastro/Cadastrar";
 import Login from "./pages/login/Login";
 import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
-import { AuthContext, AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-indigo-600">
+    <div className="min-h-screen flex flex-col bg-red-600">
       <AuthProvider>
       <BrowserRouter>
+      <ToastContainer/>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
