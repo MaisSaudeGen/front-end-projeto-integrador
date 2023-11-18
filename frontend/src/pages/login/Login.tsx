@@ -16,21 +16,6 @@ export default function Login() {
     });
   }
 
-  // async function login(e: ChangeEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-
-  //   toastAlert("Carregando", "info", 500)
-  //   const resultado = await handleLogin(usuarioLogin);
-
-  //   resultado.includes('403') || resultado.includes('401') && (
-  //     toastAlert("Email ou senha incorretos.", "error")
-  //   )
-    
-  //   if(resultado.includes('200')){
-  //     toastAlert("Usuário logado.", "success");
-  //     navigate('/postagens')
-  //   }
-  // }
    async function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     toastAlert("Carregando", "info", 500)
