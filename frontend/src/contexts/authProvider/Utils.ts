@@ -1,4 +1,4 @@
-import {api} from "../../services/API"
+import api from "../../services/API"
 import { IUser } from "./types"
 
 export async function loginRequest(email: string, password: string) {
