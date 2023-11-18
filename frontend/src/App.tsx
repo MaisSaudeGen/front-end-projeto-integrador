@@ -11,11 +11,12 @@ import { AuthProvider } from "./contexts/authProvider";
 import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
-import ListaCategorias from "./components/categorias/cardCategorias/listaCategorias/ListaCategorias";
+import ListaCategorias from "./components/categorias/listaCategorias/ListaCategorias";
+import PageCategorias from "./pages/categorias/PageCategorias";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-red-600">
+    <div className="min-h-screen flex flex-col bg-gradient-to-r from-secundario-3 to-principal-3">
       <AuthProvider>
       <BrowserRouter>
       <ToastContainer/>
@@ -27,7 +28,7 @@ function App() {
           <Route path="/logout" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/categorias" element={<ListaCategorias />} />
+          <Route path="/categorias" element={<PageCategorias/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
