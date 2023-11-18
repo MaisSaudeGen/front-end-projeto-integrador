@@ -7,10 +7,11 @@ import Cadastrar from "./pages/cadastro/Cadastrar";
 import Login from "./pages/login/Login";
 import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/authProvider/AuthContext";
 import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
+import ListaCategorias from "./components/categorias/cardCategorias/listaCategorias/ListaCategorias";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/logout" element={<Login />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/*" element={<NotFound />} />
+          <Route path="/categorias" element={<ListaCategorias />} />
         </Routes>
         <Footer />
       </BrowserRouter>

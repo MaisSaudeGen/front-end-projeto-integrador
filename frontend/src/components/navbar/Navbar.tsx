@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/authProvider/AuthContext";
 
 function Header() {
   const navigate = useNavigate();
   const { usuario, handleLogout } = useContext(AuthContext);
-  const exibir = usuario.token || "hidden" 
+  const exibir = usuario.token || "hidden"
 
-  function logout(){
+  function logout() {
     handleLogout()
     navigate('/login')
   }
 
   return (
     <header className=
-    {`
+      {`
     bg-principal-4  text-white flex justify-center px-10 py-5
     ${exibir}
     `}>
@@ -40,6 +40,15 @@ function Header() {
                 Sobre
               </Link>
             </li>
+
+            <li>
+              <Link
+                to='/categorias' 
+                className='hover:underline'>
+                Categorias
+              </Link>
+            </li>
+
             <li>
               <button
                 onClick={logout}

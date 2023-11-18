@@ -1,14 +1,16 @@
 import loginImg from "../../assets/images/login/login.png";
 import { ChangeEvent, useContext, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/authProvider/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import toastAlert from "../../utils/toastAlert";
+import { useAuth } from "../../contexts/authProvider/useAuth";
 
 export default function Login() {
   const [usuarioLogin, setUsuarioLogin] = useState({ usuario: "", senha: "" });
   const { usuario, handleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const auth = useAuth()
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setUsuarioLogin({
       ...usuarioLogin,
@@ -16,19 +18,31 @@ export default function Login() {
     });
   }
 
-  async function login(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
+  // async function login(e: ChangeEvent<HTMLFormElement>) {
+  //   e.preventDefault();
 
-    toastAlert("Carregando", "info", 500)
-    const resultado = await handleLogin(usuarioLogin);
+  //   toastAlert("Carregando", "info", 500)
+  //   const resultado = await handleLogin(usuarioLogin);
 
-    resultado.includes('403') || resultado.includes('401') && (
-      toastAlert("Email ou senha incorretos.", "error")
-    )
+  //   resultado.includes('403') || resultado.includes('401') && (
+  //     toastAlert("Email ou senha incorretos.", "error")
+  //   )
     
-    if(resultado.includes('200')){
+  //   if(resultado.includes('200')){
+  //     toastAlert("Usuário logado.", "success");
+  //     navigate('/postagens')
+  //   }
+  // }
+   async function login(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    toastAlert("Carregando", "info", 500)
+    console.log(usuarioLogin, "oi")
+    const response = await auth.authenticate(usuarioLogin.usuario, usuarioLogin.senha)
+    if (response == "200") {
+      navigate("/posts");
       toastAlert("Usuário logado.", "success");
-      navigate('/postagens')
+    } else {
+      toastAlert(response, "error");
     }
   }
 

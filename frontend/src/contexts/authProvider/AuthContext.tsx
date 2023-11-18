@@ -1,7 +1,7 @@
 import {createContext, ReactNode, useState } from "react"
 
-import UsuarioLogin from "../model/UsuarioLogin"
-import {login} from "../services/Services"
+import UsuarioLogin from "../../model/UsuarioLogin"
+import {login} from "../../services/Services"
 import { AxiosError } from "axios"
 
 interface AuthContextProps {
