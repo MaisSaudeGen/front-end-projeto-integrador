@@ -1,13 +1,11 @@
 import loginImg from "../../assets/images/login/login.png";
-import { ChangeEvent, useContext, useState } from "react";
-import { AuthContext } from "../../contexts/authProvider/AuthContext";
+import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toastAlert from "../../utils/toastAlert";
 import { useAuth } from "../../contexts/authProvider/useAuth";
 
 export default function Login() {
   const [usuarioLogin, setUsuarioLogin] = useState({ usuario: "", senha: "" });
-  const { usuario, handleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const auth = useAuth()

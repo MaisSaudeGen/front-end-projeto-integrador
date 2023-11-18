@@ -1,15 +1,14 @@
 import { GithubLogo } from "@phosphor-icons/react";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/authProvider/AuthContext";
+import { useAuth } from "../../contexts/authProvider/useAuth";
+
 
 function Footer() {
-
-    const { usuario } = useContext(AuthContext);
-    const exibir = usuario.token || "hidden" 
+  const auth = useAuth();
+  const exibir = auth.token || "hidden";
 
   return (
-    <footer className=
-    {`flex justify-center bg-indigo-900 text-white ${exibir}`}
+    <footer
+      className={`flex justify-center bg-indigo-900 text-white ${exibir}`}
     >
       <div className="container flex flex-col items-center py-4">
         <h2 className="text-xl font-bold">Mais Saúde App</h2>

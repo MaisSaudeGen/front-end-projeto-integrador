@@ -7,7 +7,7 @@ import Cadastrar from "./pages/cadastro/Cadastrar";
 import Login from "./pages/login/Login";
 import Sobre from "./pages/sobre/sobre";
 import NotFound from "./pages/not-found/NotFound";
-import { AuthProvider } from "./contexts/authProvider/AuthContext";
+import { AuthProvider } from "./contexts/authProvider";
 import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';

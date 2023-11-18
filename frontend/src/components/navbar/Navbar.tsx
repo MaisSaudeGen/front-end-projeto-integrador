@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/authProvider/AuthContext";
+import { useAuth } from "../../contexts/authProvider/useAuth";
 
 function Header() {
   const navigate = useNavigate();
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const exibir = usuario.token || "hidden"
+  const auth = useAuth()
+  const exibir = auth.token || "hidden"
 
   function logout() {
-    handleLogout()
+    auth.logout()
     navigate('/login')
   }
 

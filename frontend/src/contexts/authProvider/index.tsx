@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   async function authenticate(email: string, password: string) {
     const response = await loginRequest(email, password);
     console.log(response)
-
+    
     if(response?.code === "ERR_BAD_REQUEST") {
       return "Usuário ou senha inválidos."
     }
-
+    
     const payload = { token: response.token, email };
 
     setUser(payload);
