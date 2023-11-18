@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/authProvider/useAuth";
 function Header() {
   const navigate = useNavigate();
   const auth = useAuth()
-  const exibir = auth.token || "hidden"
+  const exibir = auth.token ? "" : "hidden"
 
   function logout() {
     auth.logout()
