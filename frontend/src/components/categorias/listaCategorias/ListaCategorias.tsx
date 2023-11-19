@@ -29,19 +29,22 @@ function ListaCategorias() {
     }
 
     setCategorias(resposta);
-    setIsLoading(false)
+    setIsLoading(false);
   }
 
   return (
     <>
-    <div className="container flex flex-col pt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {isLoading && Array(3).fill('').map((_, index) => (<CardCategorias key={index}/>))}
+      <div className="container flex flex-col pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {isLoading &&
+            Array(6)
+              .fill("")
+              .map((_, index) => <CardCategorias key={index} nome={""} descricao={""} />)}
           {categorias.map((categoria) => {
             return <CardCategorias key={categoria.id} {...categoria} />;
           })}
+        </div>
       </div>
-    </div>
     </>
   );
 }
