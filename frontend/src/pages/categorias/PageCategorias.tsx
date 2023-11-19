@@ -3,13 +3,14 @@ import ListaCategorias from "../../components/categorias/listaCategorias/ListaCa
 import Modal from "../../components/Modal";
 import FormCriarCategoria from "../../components/categorias/FormCriarCategoria";
 import BarraPesquisa from "../../components/BarraPesquisa/BarraPesquisa";
+import { RecarregarPaginaProvider } from "../../contexts/recarregarPagina";
 
 export default function PageCategorias() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <section className="flex my-4 gap-4 items-center justify-center">
+      <section className="flex py-6 gap-4 items-center justify-center bg-black bg-opacity-30">
         <button
           onClick={() => {
             setOpen(!open);
@@ -23,17 +24,19 @@ export default function PageCategorias() {
         <BarraPesquisa />
       </section>
       <section className="flex flex-col items-center justify-center grow">
-        <div className="flex justify-center w-full">
-          <Modal
-            isOpen={open}
-            setOpen={setOpen}
-            titulo="Criar Categoria"
-            descricao=""
+        <RecarregarPaginaProvider>
+          <div className="flex justify-center w-full">
+            <Modal
+              isOpen={open}
+              setOpen={setOpen}
+              titulo="Criar Categoria"
+              descricao=""
             >
-            <FormCriarCategoria setOpen={setOpen} />
-          </Modal>
-          <ListaCategorias />
-        </div>
+              <FormCriarCategoria setOpen={setOpen} />
+            </Modal>
+            <ListaCategorias />
+          </div>
+        </RecarregarPaginaProvider>
       </section>
     </>
   );

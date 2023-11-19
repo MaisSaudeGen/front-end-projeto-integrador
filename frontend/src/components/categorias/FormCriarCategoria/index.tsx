@@ -3,6 +3,7 @@ import { criarCategoria } from "../../../services/categoriasService";
 import { AxiosError } from "axios";
 import toastAlert from "../../../utils/toastAlert";
 import { useNavigate } from "react-router-dom";
+import { useRecarregarPagina } from "../../../contexts/recarregarPagina/useRecarregarPagina";
 
 
 export interface CriarCategoria {
@@ -17,6 +18,7 @@ interface Props {
 export default function FormCriarCategoria({setOpen}: Props) {
 
   const [categoria, setCategoria] = useState<CriarCategoria>({nome:'', descricao: ''})
+  const {recarregar, setRecarregar} = useRecarregarPagina()
   const navigate = useNavigate()
 
   async function cadastrarCategoria(e: FormEvent<HTMLFormElement> ) {
@@ -33,7 +35,8 @@ export default function FormCriarCategoria({setOpen}: Props) {
       }
     }
     toastAlert('Categoria criado com sucesso!', "sucesso")
-    setOpen(false)  
+    setOpen(false)
+    setRecarregar(!recarregar)  
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>){
