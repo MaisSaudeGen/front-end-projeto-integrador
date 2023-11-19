@@ -37,10 +37,10 @@ function CardCategorias({ nome, descricao }: Props) {
           </>
         ) : (
           <>
-          <div className="bg-indigo-400 w-full flex justify-center">
+          <div className="bg-indigo-400 w-full flex items-center justify-center h-[40px]">
             <Skeleton width={60} height={12} />
           </div>
-          <div className="bg-red-400 w-full flex justify-center">
+          <div className="bg-red-400 w-full flex items-center justify-center h-[40px]">
             <Skeleton width={60} height={12} />
           </div>
           </>
