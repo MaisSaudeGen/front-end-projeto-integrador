@@ -1,21 +1,40 @@
-import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { ConfirmModal } from "../../ConfirmModal/ConfirmModal";
+import { useState } from "react";
+import { excluirCategoria } from "../../../services/categoriasService";
+import Categorias from "../../../model/Categorias";
 
-interface Props {
-  nome: string;
-  descricao: string;
-}
+function CardCategorias({ id, nome, descricao }: Categorias) {
+  const [modalExcluir, setModalExcluir] = useState(false);
+  const [deletado, setDeletado] = useState(false);
 
-function CardCategorias({ nome, descricao }: Props) {
+  async function editar() {
+    console.log('Não implementado')
+  }
+
+  async function excluir() {
+    setDeletado(true);
+    const response = await excluirCategoria(id);
+    console.log(response);
+  }
+
   return (
-    <div className="border flex flex-col rounded-2xl overflow-hidden justify-between">
+    <div
+      className={`flex flex-col rounded-2xl overflow-hidden justify-between shadow-xl 
+    ${deletado && "hidden"}
+    `}
+    >
       <h2 className="py-2 px-6 bg-indigo-800 text-white font-bold text-2xl">
-        {nome || <Skeleton height={20} width={100} />}
+        {nome || <Skeleton className="cursor-wait" height={20} width={100} />}
       </h2>
       <p className="p-8 text-3xl bg-slate-200 h-full">
-        {descricao || 
-        Array(4).fill('').map((_,index) => (<Skeleton key={index} height={20} />))}
+        {descricao ||
+          Array(4)
+            .fill("")
+            .map((_, index) => (
+              <Skeleton className="cursor-wait" key={index} height={20} />
+            ))}
       </p>
 
       <div className="flex">
@@ -29,6 +48,7 @@ function CardCategorias({ nome, descricao }: Props) {
             </button>
 
             <button
+              onClick={() => {setModalExcluir(true)}}
               className="text-slate-100 bg-red-400 hover:bg-red-700 w-full 
                     flex items-center justify-center"
             >
@@ -37,15 +57,22 @@ function CardCategorias({ nome, descricao }: Props) {
           </>
         ) : (
           <>
-          <div className="bg-indigo-400 w-full flex items-center justify-center h-[40px]">
-            <Skeleton width={60} height={12} />
-          </div>
-          <div className="bg-red-400 w-full flex items-center justify-center h-[40px]">
-            <Skeleton width={60} height={12} />
-          </div>
+            <div className="cursor-wait bg-indigo-400 w-full flex items-center justify-center h-[40px]">
+              <Skeleton width={60} height={12} />
+            </div>
+            <div className="cursor-wait bg-red-400 w-full flex items-center justify-center h-[40px]">
+              <Skeleton width={60} height={12} />
+            </div>
           </>
         )}
       </div>
+      <ConfirmModal
+        isOpen={modalExcluir}
+        mostrarModal={setModalExcluir}
+        onConfirm={excluir}
+        tituloCard={nome}
+        mensagem={"Você deseja mesmo excluir?"}
+      />
     </div>
   );
 }

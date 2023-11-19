@@ -32,3 +32,18 @@ export async function criarCategoria(categoria: CriarCategoria) {
     return null
   }
 }
+
+export async function excluirCategoria(id: number) {
+  console.log("Excluir chamado")
+  try {
+    const response = await api.delete(`/categorias/${id}`)
+    return response.data
+    
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.log(error)
+      return error
+    }
+    return null
+  }
+}
