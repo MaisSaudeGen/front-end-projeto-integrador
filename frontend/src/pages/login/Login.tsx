@@ -20,7 +20,6 @@ export default function Login() {
   async function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     toastAlert("Carregando", "info", 500);
-    console.log(usuarioLogin, "oi");
     const response = await auth.authenticate(
       usuarioLogin.usuario,
       usuarioLogin.senha
