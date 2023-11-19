@@ -8,6 +8,7 @@ import Categorias from "../../../model/Categorias";
 
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categorias[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -28,18 +29,20 @@ function ListaCategorias() {
     }
 
     setCategorias(resposta);
+    setIsLoading(false)
   }
 
   return (
+    <>
     <div className="container flex flex-col">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <>
+        {isLoading && Array(3).fill('').map((_, index) => (<CardCategorias key={index}/>))}
           {categorias.map((categoria) => {
             return <CardCategorias key={categoria.id} {...categoria} />;
           })}
-        </>
       </div>
     </div>
+    </>
   );
 }
 

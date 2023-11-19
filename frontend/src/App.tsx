@@ -10,27 +10,30 @@ import NotFound from "./pages/not-found/NotFound";
 import { AuthProvider } from "./contexts/authProvider";
 import { ToastContainer } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import PageCategorias from "./pages/categorias/PageCategorias";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-secundario-3 to-principal-3">
       <AuthProvider>
-      <BrowserRouter>
-      <ToastContainer/>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastrar" element={<Cadastrar />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Login />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/*" element={<NotFound />} />
-          <Route path="/categorias" element={<PageCategorias/>} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        <BrowserRouter>
+          <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
+            <ToastContainer />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cadastrar" element={<Cadastrar />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Login />} />
+              <Route path="/sobre" element={<Sobre />} />
+              <Route path="/*" element={<NotFound />} />
+              <Route path="/categorias" element={<PageCategorias />} />
+            </Routes>
+            <Footer />
+          </SkeletonTheme>
+        </BrowserRouter>
       </AuthProvider>
     </div>
   );
