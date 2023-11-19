@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/authProvider/useAuth";
 
 function Footer() {
   const auth = useAuth();
-  const exibir = auth.token || "hidden";
+  const exibir = auth.token ? "" : "hidden";
 
   return (
     <footer
