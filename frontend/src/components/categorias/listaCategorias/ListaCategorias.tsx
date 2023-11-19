@@ -34,7 +34,7 @@ function ListaCategorias() {
 
   return (
     <>
-    <div className="container flex flex-col">
+    <div className="container flex flex-col pt-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading && Array(3).fill('').map((_, index) => (<CardCategorias key={index}/>))}
           {categorias.map((categoria) => {
