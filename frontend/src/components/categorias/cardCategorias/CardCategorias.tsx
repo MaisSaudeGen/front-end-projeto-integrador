@@ -28,9 +28,9 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
       <h2 className="py-2 px-6 bg-indigo-800 text-white font-bold text-2xl">
         {nome || <Skeleton className="cursor-wait" height={20} width={100} />}
       </h2>
-      <p className="p-8 text-3xl bg-slate-200 h-full">
+      <p className="p-4 text-xl bg-slate-200 h-full min-h-[125px]">
         {descricao ||
-          Array(4)
+          Array(3)
             .fill("")
             .map((_, index) => (
               <Skeleton className="cursor-wait" key={index} height={20} />
