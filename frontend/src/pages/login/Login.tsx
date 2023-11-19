@@ -5,10 +5,11 @@ import toastAlert from "../../utils/toastAlert";
 import { useAuth } from "../../contexts/authProvider/useAuth";
 
 export default function Login() {
+  const [verSenha, setVerSenha] = useState(false);
   const [usuarioLogin, setUsuarioLogin] = useState({ usuario: "", senha: "" });
   const navigate = useNavigate();
 
-  const auth = useAuth()
+  const auth = useAuth();
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setUsuarioLogin({
       ...usuarioLogin,
@@ -16,11 +17,14 @@ export default function Login() {
     });
   }
 
-   async function login(e: ChangeEvent<HTMLFormElement>) {
+  async function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    toastAlert("Carregando", "info", 500)
-    console.log(usuarioLogin, "oi")
-    const response = await auth.authenticate(usuarioLogin.usuario, usuarioLogin.senha)
+    toastAlert("Carregando", "info", 500);
+    console.log(usuarioLogin, "oi");
+    const response = await auth.authenticate(
+      usuarioLogin.usuario,
+      usuarioLogin.senha
+    );
     if (response == "200") {
       navigate("/posts");
       toastAlert("Usuário logado.", "success");
@@ -48,9 +52,13 @@ export default function Login() {
           flex flex-col items-center justify-center my-10 
           "
         >
-          <img className="w-[250px] mb-4" src={loginImg} alt="Logo mais saúde." />
-          <form onSubmit={login}>
-            <div className="flex text-lg flex-col w-full mb-2">
+          <img
+            className="w-[250px] mb-4"
+            src={loginImg}
+            alt="Logo mais saúde."
+          />
+          <form onSubmit={login} className="flex flex-col gap-2">
+            <div className="flex text-lg flex-col w-full">
               <label className="text-white text-lg" htmlFor="usuario">
                 Email
               </label>
@@ -70,16 +78,13 @@ export default function Login() {
                   atualizarEstado(e)
                 }
               ></input>
-              {
-              usuarioLogin.usuario.length === 0 || 
-                ( 
-                  usuarioLogin.usuario.includes(".") &&
-                  usuarioLogin.usuario.includes("@")
-                ) ||
-              <span className="text-red-500 text-center pt-1">
-                Email deve incluir '.' e '@'
-              </span>
-              }
+              {usuarioLogin.usuario.length === 0 ||
+                (usuarioLogin.usuario.includes(".") &&
+                  usuarioLogin.usuario.includes("@")) || (
+                  <span className="text-red-500 text-center pt-1">
+                    Email deve incluir '.' e '@'
+                  </span>
+                )}
             </div>
 
             <div className="flex flex-col">
@@ -88,7 +93,7 @@ export default function Login() {
               </label>
               <input
                 required
-                type="password"
+                type={verSenha ? "text" : "password"}
                 id="senha"
                 name="senha"
                 placeholder="Digite 8 caracteres ou mais"
@@ -102,18 +107,23 @@ export default function Login() {
                   atualizarEstado(e)
                 }
               ></input>
-              { (usuarioLogin.senha.length > 0 && usuarioLogin.senha.length < 8 ) &&
-              <span className="text-red-500 text-center pt-1">
-                Digite no mínimo 8 caracteres.
-              </span>
-              }
             </div>
-
+            <div className="flex items-center justify-center">
+              <input
+                type="checkbox"
+                id="verSenha"
+                onChange={() => {
+                  setVerSenha(!verSenha);
+                }}
+              />
+              <label htmlFor="verSenha" className="text-white text-md pl-1">
+                Ver senha
+              </label>
+            </div>
             <div className="flex flex-col justify-center">
               <button
                 type="submit"
-
-                className=" mt-4
+                className="
                 text-md
                 self-center
                 text-white bg-green-700 

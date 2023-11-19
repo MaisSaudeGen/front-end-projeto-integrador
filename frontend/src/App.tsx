@@ -11,7 +11,6 @@ import { AuthProvider } from "./contexts/authProvider";
 import { ToastContainer } from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';
-import ListaCategorias from "./components/categorias/listaCategorias/ListaCategorias";
 import PageCategorias from "./pages/categorias/PageCategorias";
 
 function App() {
