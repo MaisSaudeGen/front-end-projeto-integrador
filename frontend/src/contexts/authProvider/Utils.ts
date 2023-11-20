@@ -3,7 +3,7 @@ import { IUser } from "./types"
 
 export async function loginRequest(email: string, password: string) {
   try {
-    console.log({ email, "senha": password })
+    console.log({ email, "senha": "protected" })
     const request = await api.post("/usuarios/logar", { "usuario": email, "senha": password },);
     return request.data;
   } catch (error) {

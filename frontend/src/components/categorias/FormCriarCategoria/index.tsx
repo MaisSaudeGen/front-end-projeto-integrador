@@ -37,6 +37,7 @@ export default function FormCriarCategoria({setOpen}: Props) {
     toastAlert('Categoria criado com sucesso!', "sucesso")
     setOpen(false)
     setRecarregar(!recarregar)  
+    console.log({ email, "senha": "protected" })
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>){
