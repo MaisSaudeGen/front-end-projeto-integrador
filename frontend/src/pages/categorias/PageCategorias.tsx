@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListaCategorias from "../../components/categorias/listaCategorias/ListaCategorias";
 import Modal from "../../components/Modal";
 import FormCriarCategoria from "../../components/categorias/FormCriarCategoria";
