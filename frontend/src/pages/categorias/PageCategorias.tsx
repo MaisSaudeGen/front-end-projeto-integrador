@@ -4,12 +4,13 @@ import Modal from "../../components/Modal";
 import FormCriarCategoria from "../../components/categorias/FormCriarCategoria";
 import BarraPesquisa from "../../components/BarraPesquisa/BarraPesquisa";
 import { RecarregarPaginaProvider } from "../../contexts/recarregarPagina";
+import { CategoriaPesquisadaProvider } from "../../contexts/CategoriasPesquisadas/categoriasPesquisadas";
 
 export default function PageCategorias() {
   const [open, setOpen] = useState(false);
-
+  //Criar um botão de voltar quando usuario pesquisar algo?
   return (
-    <>
+    <CategoriaPesquisadaProvider>
       <section className="flex py-6 gap-4 items-center justify-center bg-black bg-opacity-30">
         <button
           onClick={() => {
@@ -25,19 +26,16 @@ export default function PageCategorias() {
       </section>
       <section className="flex flex-col items-center justify-center grow">
         <RecarregarPaginaProvider>
-          <div className="flex justify-center w-full">
-            <Modal
-              isOpen={open}
-              setOpen={setOpen}
-              titulo="Criar Categoria"
-              descricao=""
-            >
-              <FormCriarCategoria setOpen={setOpen} />
-            </Modal>
-            <ListaCategorias />
-          </div>
+          <Modal
+            isOpen={open}
+            titulo="Criar Categoria"
+            descricao="Preencha os campos abaixo para criar uma nova categoria."
+          >
+            <FormCriarCategoria setOpen={setOpen} />
+          </Modal>
+          <ListaCategorias />
         </RecarregarPaginaProvider>
       </section>
-    </>
+    </CategoriaPesquisadaProvider>
   );
 }
