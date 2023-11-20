@@ -6,11 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import Categorias from "../../../model/Categorias";
 import { useRecarregarPagina } from "../../../contexts/recarregarPagina/useRecarregarPagina";
+import { useCategoriasPesquisadas } from "../../../contexts/CategoriasPesquisadas/useCategoriasPesquisadas";
 
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categorias[]>([]);
+  //Trasnformar em um contexto loading parar usar em toda a pagina
   const [isLoading, setIsLoading] = useState(true);
-  const {recarregar} = useRecarregarPagina()
+  const { recarregar } = useRecarregarPagina();
+  const { categoriasPesquisadas } =
+  useCategoriasPesquisadas();
 
   const navigate = useNavigate();
 
@@ -35,19 +39,26 @@ function ListaCategorias() {
   }
 
   return (
-    <>
-      <div className="container flex flex-col">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
-          {isLoading &&
-            Array(6)
-              .fill("")
-              .map((_, index) => <CardCategorias key={index} nome={""} descricao={""} id={0} />)}
-          {categorias.map((categoria) => {
+    <div className="container flex flex-col">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+        {isLoading &&
+          Array(6)
+            .fill("")
+            .map((_, index) => (
+              <CardCategorias key={index} nome={""} descricao={""} id={0} />
+            ))}
+        {
+          categoriasPesquisadas.length > 0 ?
+          categoriasPesquisadas.map((categoria) => {
             return <CardCategorias key={categoria.id} {...categoria} />;
-          })}
-        </div>
+          })
+          :
+          categorias.map((categoria) => {
+            return <CardCategorias key={categoria.id} {...categoria} />;
+          })
+        }
       </div>
-    </>
+    </div>
   );
 }
 
