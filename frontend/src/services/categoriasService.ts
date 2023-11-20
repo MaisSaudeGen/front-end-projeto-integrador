@@ -63,3 +63,18 @@ export async function editarCategoria(categoria: Categorias) {
     return null
   }
 }
+
+export async function buscarCategoriaPorNome(nome: string) {
+  console.log("Bucar por nome chamado")
+  try {
+    const response = await api.get(`/categorias/nome/${nome}`)
+    return response.data
+    
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.log(error)
+      return error
+    }
+    return null
+  }
+}
