@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PageCategorias from "./pages/categorias/PageCategorias";
 import { SkeletonTheme } from "react-loading-skeleton";
 import PageCategoriaId from "./pages/CategoriaId";
+import PagePostagens from "./pages/postagens/PagePostagens";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/*" element={<NotFound />} />
               <Route path="/categorias" element={<PageCategorias />} />
               <Route path="/categorias/:idCategoria" element={<PageCategoriaId />} />
+              <Route path="/postagens" element={<PagePostagens />} />
             </Routes>
             <Footer />
           </SkeletonTheme>
