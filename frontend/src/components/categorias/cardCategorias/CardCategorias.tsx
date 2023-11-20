@@ -1,16 +1,24 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ConfirmModal } from "../../ConfirmModal/ConfirmModal";
-import { useState } from "react";
-import { excluirCategoria } from "../../../services/categoriasService";
+import { ChangeEvent, useState } from "react";
+import { editarCategoria, excluirCategoria } from "../../../services/categoriasService";
 import Categorias from "../../../model/Categorias";
 
 function CardCategorias({ id, nome, descricao }: Categorias) {
+  const [categoria, setCategoria] = useState<Categorias>({
+    id: id,
+    nome: nome,
+    descricao: descricao,
+  });
   const [modalExcluir, setModalExcluir] = useState(false);
   const [deletado, setDeletado] = useState(false);
+  const [editado, setEditado] = useState(false);
 
-  async function editar() {
-    console.log('Não implementado')
+  async function salvarEdicao() {
+    setEditado(!editado);
+    const resultado = await editarCategoria(categoria)
+    console.log(resultado)
   }
 
   async function excluir() {
@@ -19,59 +27,108 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
     console.log(response);
   }
 
+  function recarregarEstado(e: ChangeEvent<HTMLInputElement>) {
+    setCategoria({ ...categoria, [e.target.name]: e.target.value });
+  }
+
   return (
     <div
-      className={`flex flex-col rounded-2xl overflow-hidden justify-between shadow-xl 
+      className={`flex flex-col rounded-2xl  justify-between shadow-xl overflow-hidden
     ${deletado && "hidden"}
     `}
     >
-      <h2 className="py-2 px-6 bg-indigo-800 text-white font-bold text-2xl">
-        {nome || <Skeleton className="cursor-wait" height={20} width={100} />}
-      </h2>
-      <p className="p-4 text-xl bg-slate-200 h-full min-h-[125px]">
-        {descricao ||
-          Array(3)
-            .fill("")
-            .map((_, index) => (
-              <Skeleton className="cursor-wait" key={index} height={20} />
-            ))}
-      </p>
+      {editado ? (
+        <textarea
+          id="NomeDaCategoria"
+          className={`
+          py-2 px-4 bg-black bg-opacity-60 text-white font-bold text-2xl
+          border-2 rounded-t-2xl outline-white 
+          focus:bg-opacity-70 resize-none 
+          
+          `}
+          rows={4}
+          name="nome"
+          value={categoria.nome}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            recarregarEstado(e);
+          }}
+        />
+      ) : (
+        <p className="py-2 px-4 rounded-t-md bg-black bg-opacity-50 text-white font-bold text-2xl ">
+          {categoria.nome || (
+            <Skeleton className="cursor-wait" height={20} width={100} />
+          )}
+        </p>
+      )}
+      {editado ? (
+        <textarea
+          className="p-4 text-xl text-white bg-green-600 bg-opacity-80 h-full 
+         outline-white border-2 resize-none "
+          rows={4}
+          name="descricao"
+          value={categoria.descricao}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+             recarregarEstado(e)
+          }}
+        />
+      ) : (
+        <p className="p-4 text-xl text-white bg-black bg-opacity-30 h-full min-h-[125px]">
+          {categoria.descricao ||
+            Array(3)
+              .fill("")
+              .map((_, index) => (
+                <Skeleton className="cursor-wait" key={index} height={20} />
+              ))}
+        </p>
+      )}
 
-      <div className="flex">
-        {nome ? (
-          <>
+      <div id="BotoesCardCategorias"className="bg-black bg-opacity-30 py-2">
+        {categoria.nome ? (
+          <div className="flex justify-center items-center gap-8">
             <button
-              onClick={editar}
-              className="w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800 
-                        flex items-center justify-center py-2"
+              onClick={ () =>{
+                editado? salvarEdicao() : setEditado(true)
+              }
+              }
+              className="text-white bg-indigo-700 hover:bg-indigo-600 
+                          py-2 px-8 rounded-full"
             >
-              Editar
+              
+              {editado? "Salvar" : "Editar"}
             </button>
 
             <button
-              onClick={() => {setModalExcluir(true)}}
-              className="text-slate-100 bg-red-400 hover:bg-red-700 w-full 
-                    flex items-center justify-center"
+              onClick={() => {
+                editado ? setEditado(false) : setModalExcluir(true);
+              }}
+              className="text-white bg-red-700 hover:bg-red-600 
+              py-2 px-8 rounded-full"
             >
-              Deletar
+              {editado? "Cancelar" : "Excluir"}
             </button>
-          </>
+          </div>
         ) : (
-          <>
-            <div className="cursor-wait bg-indigo-400 w-full flex items-center justify-center h-[40px]">
+          <div className="flex justify-center items-center gap-8">
+            <div
+              className="cursor-wait text-white bg-indigo-700 hover:bg-indigo-600 
+                          py-2 px-8 rounded-full"
+            >
               <Skeleton width={60} height={12} />
             </div>
-            <div className="cursor-wait bg-red-400 w-full flex items-center justify-center h-[40px]">
+            <div
+              className="cursor-wait text-white bg-red-700 hover:bg-red-600 
+              py-2 px-8 rounded-full"
+            >
               <Skeleton width={60} height={12} />
             </div>
-          </>
+          </div>
         )}
       </div>
       <ConfirmModal
         isOpen={modalExcluir}
         mostrarModal={setModalExcluir}
         onConfirm={excluir}
-        tituloCard={nome}
+        tituloCard={categoria.nome}
         mensagem={"Você deseja mesmo excluir?"}
       />
     </div>
