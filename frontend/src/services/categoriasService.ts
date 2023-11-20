@@ -78,3 +78,18 @@ export async function buscarCategoriaPorNome(nome: string) {
     return null
   }
 }
+
+export async function buscarCategoriaPorId(id: string) {
+  console.log("Bucar por id chamado", id)
+  try {
+    const response = await api.get(`/categorias/${id}`)
+    return response.data
+    
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.log(error)
+      return error
+    }
+    return null
+  }
+}

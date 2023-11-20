@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PageCategorias from "./pages/categorias/PageCategorias";
 import { SkeletonTheme } from "react-loading-skeleton";
+import PageCategoriaId from "./pages/CategoriaId";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/sobre" element={<Sobre />} />
               <Route path="/*" element={<NotFound />} />
               <Route path="/categorias" element={<PageCategorias />} />
+              <Route path="/categorias/:idCategoria" element={<PageCategoriaId />} />
             </Routes>
             <Footer />
           </SkeletonTheme>
