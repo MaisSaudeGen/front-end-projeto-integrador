@@ -5,25 +5,25 @@ import { useCategoriasPesquisadas } from "../../contexts/CategoriasPesquisadas/u
 
 export default function BarraPesquisa() {
   const [pesquisa, setPesquisa] = useState("");
-  const { setCategoriasPesquisadas, setCarregando } =
-    useCategoriasPesquisadas();
+  const { setCategoriasPesquisadas } = useCategoriasPesquisadas();
 
-  async function pesquisar(e: ChangeEvent<HTMLFormElement> | undefined = undefined) {
+  async function pesquisar(
+    e: ChangeEvent<HTMLFormElement> | undefined = undefined
+  ) {
     if(e !== undefined){
       e.preventDefault();
     }
 
     if(pesquisa == "" || pesquisa == " "){
-      setCategoriasPesquisadas([])
-      return
+      setCategoriasPesquisadas([]);
+      return;
     }
+    toastAlert("Pesquisando...", "info", 1000);
 
     const resposta = await buscarCategoriaPorNome(pesquisa);
-    setCarregando(true);
-    toastAlert("Pesquisando...", "info", 1000);
     console.log(resposta);
     if(resposta.length == 0){
-      toastAlert("Nada encontrado.", "info", 2500)
+      toastAlert("Nada encontrado.", "info", 2500);
     }
     setCategoriasPesquisadas(resposta);
   }
@@ -61,11 +61,9 @@ export default function BarraPesquisa() {
           type="search"
           id="default-search"
           value={pesquisa}
-          onChange={(e) => {
-            setPesquisa(e.target.value)
-          }}
-          className="block w-full p-4 ps-10 text-md text-white border  rounded-lg bg-black bg-opacity-40
-            focus:ring-blue-500 focus:border-blue-500 focus:outline-none
+          onChange={(e) => setPesquisa(e.target.value)}
+          className="block w-full p-4 ps-10 text-md text-white border rounded-lg bg-black bg-opacity-40
+            focus:ring-blue-500 focus:border-blue-500 focus:outline-none 
             "
           // dark mode não impl -> dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
           placeholder="Nome do tema"

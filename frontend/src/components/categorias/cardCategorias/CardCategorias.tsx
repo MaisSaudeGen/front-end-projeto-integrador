@@ -33,7 +33,10 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
 
   return (
     <div
-      className={`flex flex-col rounded-2xl  justify-between shadow-xl overflow-hidden
+      className={`flex flex-col rounded-2xl 
+      w-[100%] md:w-[80%] lg:w-[40%]
+      justify-between shadow-2xl overflow-hidden
+      hover:scale-105 duration-300
     ${deletado && "hidden"}
     `}
     >
@@ -56,7 +59,7 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
       ) : (
         <p className="py-2 px-4 rounded-t-md bg-black bg-opacity-50 text-white font-bold text-2xl ">
           {categoria.nome || (
-            <Skeleton className="cursor-wait" height={20} width={100} />
+            <Skeleton className="cursor-wait" height={20} width={150} />
           )}
         </p>
       )}
