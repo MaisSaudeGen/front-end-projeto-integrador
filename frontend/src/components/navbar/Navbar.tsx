@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authProvider/useAuth";
+import logo from "../../assets/images/login/login.png"
 
 function Header() {
   const navigate = useNavigate();
@@ -14,19 +15,19 @@ function Header() {
   return (
     <header className=
       {`
-    bg-principal-4  text-white flex justify-center px-10 py-5
+    bg-principal-4  text-white flex justify-center px-8 py-2
     ${exibir}
     `}>
       <div className="container flex justify-between text-lg">
         <Link to="/">
-          <h1 className="text-2xl font-bold">Mais Saúde</h1>
+          <img src={logo} className="h-[50px]" alt="" />
         </Link>
-        <nav>
-          <ul className="flex gap-4">
+        <nav className="flex justify-center items-center">
+          <ul className="flex gap-4 justify-center items-center">
             <li>
               <Link
                 to="/"
-                className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]"
+                className="hover:underline rounded px-4 py-[0.2rem]"
               >
                 Home
               </Link>
@@ -34,7 +35,7 @@ function Header() {
             <li>
               <Link
                 to="/sobre"
-                className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]"
+                className="hover:underline rounded px-4 py-[0.2rem]"
               >
                 Sobre
               </Link>
@@ -51,7 +52,7 @@ function Header() {
             <li>
               <button
                 onClick={logout}
-                className="hover:bg-white hover:text-black rounded px-4 py-[0.2rem]"
+                className="hover:underline rounded px-2"
               >
                 Sair
               </button>
