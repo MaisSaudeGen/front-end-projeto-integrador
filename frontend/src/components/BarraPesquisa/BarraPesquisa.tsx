@@ -8,8 +8,15 @@ export default function BarraPesquisa() {
   const { setCategoriasPesquisadas, setCarregando } =
     useCategoriasPesquisadas();
 
-  async function pesquisar(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function pesquisar(e: ChangeEvent<HTMLFormElement> | undefined = undefined) {
+    if(e !== undefined){
+      e.preventDefault();
+    }
+
+    if(pesquisa == "" || pesquisa == " "){
+      setCategoriasPesquisadas([])
+      return
+    }
 
     const resposta = await buscarCategoriaPorNome(pesquisa);
     setCarregando(true);
@@ -54,13 +61,14 @@ export default function BarraPesquisa() {
           type="search"
           id="default-search"
           value={pesquisa}
-          onChange={(e) => setPesquisa(e.target.value)}
+          onChange={(e) => {
+            setPesquisa(e.target.value)
+          }}
           className="block w-full p-4 ps-10 text-md text-white border  rounded-lg bg-black bg-opacity-40
             focus:ring-blue-500 focus:border-blue-500 focus:outline-none
             "
           // dark mode não impl -> dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
           placeholder="Nome do tema"
-          required
         />
         <button
           type="submit"

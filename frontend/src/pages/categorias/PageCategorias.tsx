@@ -5,6 +5,7 @@ import FormCriarCategoria from "../../components/categorias/FormCriarCategoria";
 import BarraPesquisa from "../../components/BarraPesquisa/BarraPesquisa";
 import { RecarregarPaginaProvider } from "../../contexts/recarregarPagina";
 import { CategoriaPesquisadaProvider } from "../../contexts/CategoriasPesquisadas/categoriasPesquisadas";
+import Botao from "../../components/BotãoVoltarCategoria";
 
 export default function PageCategorias() {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function PageCategorias() {
           Criar nova categoria
         </button>
         <BarraPesquisa />
+        <Botao texto="Voltar" className={""} />
       </section>
       <section className="flex flex-col items-center justify-center grow">
         <RecarregarPaginaProvider>
