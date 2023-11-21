@@ -1,15 +1,17 @@
 import loginImg from "../../assets/images/login/login.png";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toastAlert from "../../utils/toastAlert";
 import { useAuth } from "../../contexts/authProvider/useAuth";
+import { useUserInfo } from "../../contexts/UserContex/useUserInfo";
 
 export default function Login() {
   const [verSenha, setVerSenha] = useState(false);
   const [usuarioLogin, setUsuarioLogin] = useState({ usuario: "", senha: "" });
   const navigate = useNavigate();
-
   const auth = useAuth();
+  const {setUser} = useUserInfo()
+
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setUsuarioLogin({
       ...usuarioLogin,
@@ -20,15 +22,18 @@ export default function Login() {
   async function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     toastAlert("Carregando", "info", 500);
-    const response = await auth.authenticate(
+    const [response, mensagem] = await auth.authenticate(
       usuarioLogin.usuario,
       usuarioLogin.senha
     );
-    if (response == "200") {
-      navigate("/posts");
+
+    if (mensagem == "200") {
+      navigate("/postagens");
       toastAlert("Usuário logado.", "success");
+      console.log("Resposta da API: ", response)
+      setUser({...response})
     } else {
-      toastAlert(response, "error");
+      toastAlert("Email ou senha incorretos.", "error");
     }
   }
 

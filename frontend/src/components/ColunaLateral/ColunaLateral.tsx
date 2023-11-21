@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function ColunaLateral() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const Menus = [
     { title: "Dashboard", src: "/images/ColunaLateral/Chart_fill" },
@@ -15,15 +15,15 @@ export default function ColunaLateral() {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex fixed h-full -top-0">
     <div
-      className={` ${
-        open ? "w-72" : "w-20 "
-      } bg-black bg-opacity-50 h-screen p-5  pt-8 relative duration-300`}
+      className={` ${ 
+        open ? "w-72" : "w-20"
+      } bg-black bg-opacity-50 backdrop-blur-sm  p-5 relative duration-300 pt-[100px]`}
     >
       <img
         src="./src/assets/images/ColunaLateral/control.png"
-        className={`absolute cursor-pointer -right-3 top-[58px] w-7 border-black bg-opacity-50
+        className={`absolute cursor-pointer -right-3 top-[127px] w-7 border-black bg-opacity-50
          border-2 rounded-full  ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       />

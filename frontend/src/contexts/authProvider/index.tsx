@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     console.log(response)
     
     if(response?.code === "ERR_BAD_REQUEST") {
-      return "Usuário ou senha inválidos."
+      return [response, "400"]
     }
     
     const payload = { token: response.token, email };
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     setUser(payload);
     setUserLocalStorage(payload);
 
-    return "200"
+    return [response, "200"]
   }
 
   function logout() {
