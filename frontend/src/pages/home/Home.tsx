@@ -12,11 +12,8 @@ function Home() {
             <h1 className="text-3xl font-bold text-white text-center">
               Mais Saúde
             </h1>
-            <p className="text-xl text-white max-w-[500px]">
-              Seja bem-vindo à nossa plataforma dedicada ao apoio emocional e ao
-              fortalecimento da saúde mental. Aqui, acreditamos que juntos
-              podemos construir uma comunidade de apoio, compreensão e
-              crescimento.
+            <p className="text-xl text-white max-w-[500px] text-center">
+            Mais Saúde é uma plataforma dedicada a conectar pessoas e promover a saúde mental. Junte-se a nós para construir uma comunidade de apoio e compartilhar conhecimentos essenciais para o bem-estar.
             </p>
             <div className="flex flex-col ">
               <Link

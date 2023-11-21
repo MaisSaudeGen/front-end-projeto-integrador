@@ -15,11 +15,14 @@ import PageCategorias from "./pages/categorias/PageCategorias";
 import { SkeletonTheme } from "react-loading-skeleton";
 import PageCategoriaId from "./pages/CategoriaId";
 import PagePostagens from "./pages/postagens/PagePostagens";
+import Usuario from './pages/usuario/Usuario';
+import { UserInfoProvider } from "./contexts/UserContext/UserContex";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-secundario-3 to-principal-3">
       <AuthProvider>
+        <UserInfoProvider>
         <BrowserRouter>
           <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
             <ToastContainer />
@@ -34,10 +37,12 @@ function App() {
               <Route path="/categorias" element={<PageCategorias />} />
               <Route path="/categorias/:idCategoria" element={<PageCategoriaId />} />
               <Route path="/postagens" element={<PagePostagens />} />
+              <Route path="/perfil" element={<Usuario/>} />
             </Routes>
             <Footer />
           </SkeletonTheme>
         </BrowserRouter>
+        </UserInfoProvider>
       </AuthProvider>
     </div>
   );
