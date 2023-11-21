@@ -15,7 +15,7 @@ function Header() {
   return (
     <header
       className={`
-    bg-principal-4  text-white flex justify-center px-8 py-2
+    bg-principal-4  text-white flex justify-center px-8 py-2 z-10
     ${exibir}
     `}
     >
