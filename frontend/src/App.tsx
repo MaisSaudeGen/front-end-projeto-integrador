@@ -15,29 +15,35 @@ import PageCategorias from "./pages/categorias/PageCategorias";
 import { SkeletonTheme } from "react-loading-skeleton";
 import PageCategoriaId from "./pages/CategoriaId";
 import PagePostagens from "./pages/postagens/PagePostagens";
+import { UserInfoProvider } from "./contexts/UserContex/UserContex";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-secundario-3 to-principal-3">
       <AuthProvider>
-        <BrowserRouter>
-          <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
-            <ToastContainer />
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cadastrar" element={<Cadastrar />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Login />} />
-              <Route path="/sobre" element={<Sobre />} />
-              <Route path="/*" element={<NotFound />} />
-              <Route path="/categorias" element={<PageCategorias />} />
-              <Route path="/categorias/:idCategoria" element={<PageCategoriaId />} />
-              <Route path="/postagens" element={<PagePostagens />} />
-            </Routes>
-            <Footer />
-          </SkeletonTheme>
-        </BrowserRouter>
+        <UserInfoProvider>
+          <BrowserRouter>
+            <SkeletonTheme baseColor="#dddddd" highlightColor="#ffffff">
+              <ToastContainer />
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/cadastrar" element={<Cadastrar />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Login />} />
+                <Route path="/sobre" element={<Sobre />} />
+                <Route path="/*" element={<NotFound />} />
+                <Route path="/categorias" element={<PageCategorias />} />
+                <Route
+                  path="/categorias/:idCategoria"
+                  element={<PageCategoriaId />}
+                />
+                <Route path="/postagens" element={<PagePostagens />} />
+              </Routes>
+              <Footer />
+            </SkeletonTheme>
+          </BrowserRouter>
+        </UserInfoProvider>
       </AuthProvider>
     </div>
   );
