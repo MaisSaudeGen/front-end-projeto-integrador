@@ -1,12 +1,15 @@
-import Categorias from './Categorias';
-import Usuario from './Usuario';
+import Categorias from "./Categorias"
+import Usuario from "./Usuario"
 
 export default interface Postagem{
-
-    corpo: string;
-    likes: number;
-    compartilhamentos: number;
-    comentarios: string;
-
-
+    id: number
+    texto: string
+    data: string
+    titulo:  string
+    corpo:  string
+    likes: number
+    compartilhamentos: number
+    comentarios: string
+    categorias: Categorias
+    usuario: Usuario
 }
