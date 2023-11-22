@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <footer
-      className={`flex justify-center bg-indigo-900 text-white ${exibir}`}
+      className={`flex justify-center bg-indigo-900 text-white ${exibir} z-10`}
     >
       <div className="container flex flex-col items-center py-4">
         <h2 className="text-xl font-bold">Mais Saúde App</h2>
