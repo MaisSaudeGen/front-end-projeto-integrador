@@ -15,7 +15,7 @@ function Header() {
   return (
     <header
       className={`
-    bg-principal-4  text-white flex justify-center px-8 py-2
+      bg-gradient-to-r from-secundario-4 to-principal-4  text-white flex justify-center px-8 py-2
     ${exibir}
     `}
     >
@@ -41,6 +41,11 @@ function Header() {
                 className="hover:underline rounded px-4 py-[0.2rem]"
               >
                 Sobre
+              </Link>
+            </li>
+            <li>
+              <Link to="/usuarios" className="hover:underline">
+                Usuario
               </Link>
             </li>
             <li>
