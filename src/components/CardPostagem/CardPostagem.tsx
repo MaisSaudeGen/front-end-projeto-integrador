@@ -91,8 +91,9 @@ export default function CardPostagem({
       <section
         className={` ${
           deletado && "hidden"
-        } flex flex-col  bg-black bg-opacity-40 rounded-md max-w-[70%] p-4 gap-4
-      min-w-[70%]`}
+        } flex flex-col  bg-black bg-opacity-40 rounded-md p-4 gap-4
+          sm:w-[70%] xl:w-[850px] 2xl:w-[850px]
+       `}
       >
         <div
           id="cabecalhoPost"

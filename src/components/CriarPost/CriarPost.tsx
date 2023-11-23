@@ -8,7 +8,7 @@ export default function CriarPost() {
   
   return (
     <>
-      <div className="bg-black bg-opacity-30 text-white p-8 rounded-md w-[70%]">
+      <div className="bg-black bg-opacity-30 text-white p-8 rounded-md sm:w-[70%] xl:w-[850px] 2xl:w-[850px]">
         <div className="flex justify-center items-center gap-2">
           <img src={userImg} alt="Sua imagem de perfil" />
           <button

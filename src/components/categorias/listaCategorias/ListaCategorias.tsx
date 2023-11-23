@@ -28,7 +28,7 @@ function ListaCategorias() {
     console.log(resposta);
 
     if (resposta instanceof AxiosError) {
-      if (resposta?.message.includes("401")) {
+      if (resposta?.message.includes("401") || resposta?.message.includes("403")) {
         toastAlert("Você precisa logar para ver esse conteúdo", "info");
         navigate("/login");
       }
