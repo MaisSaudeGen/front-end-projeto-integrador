@@ -12,7 +12,9 @@ export default function PageCategoriaId() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    buscarCard(idCategoria)
+    if (idCategoria){
+      buscarCard(idCategoria)
+    }
   }, [])
 
   async function buscarCard(cardId:string) {
