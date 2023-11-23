@@ -16,6 +16,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import PageCategoriaId from "./pages/CategoriaId";
 import PagePostagens from "./pages/postagens/PagePostagens";
 import { UserInfoProvider } from "./contexts/UserContex/UserContex";
+import ListarUsuario from "./pages/usuario/listarUsuario/ListarUsuario";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
                   element={<PageCategoriaId />}
                 />
                 <Route path="/postagens" element={<PagePostagens />} />
+                <Route path="/usuarios" element={<ListarUsuario />} />
+                
               </Routes>
               <Footer />
             </SkeletonTheme>
