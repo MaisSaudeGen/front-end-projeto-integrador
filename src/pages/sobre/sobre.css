@@ -1,0 +1,37 @@
+
+
+.sobre {
+    @apply grid gap-20 p-20;
+}
+
+.titulo-desenvolvedores {
+    font-size: 24px;
+}
+
+.quem-somos {
+    font-size: 24px;
+}
+
+.sobre .membro {
+    @apply bg-white rounded-lg shadow-md p-20;
+}
+
+.sobre .membro img {
+    @apply w-full h-auto rounded-full object-cover;
+}
+
+.sobre .membro h2 {
+    @apply text-2xl mb-2;
+}
+
+.sobre .membro p {
+    @apply text-gray-500 mb-2;
+}
+
+.sobre .membro .links {
+    @apply flex gap-2;
+}
+
+.sobre .membro .links a {
+    @apply text-blue-500 hover:text-blue-700;
+}
