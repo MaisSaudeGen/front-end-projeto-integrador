@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useUserInfo } from '../../contexts/UserContext/useUserInfo'
-import { useAuth } from '../../contexts/authProvider/useAuth'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUserInfo } from '../../../contexts/UserContext/useUserInfo'
+import { useAuth } from '../../../contexts/authProvider/useAuth'
 
 
 function Usuario() {
@@ -34,6 +34,20 @@ function Usuario() {
             >
                 <p>Nome: {user.nome} </p>
                 <p>Email: {user.usuario}</p>
+            </div>
+
+            <div className="flex">
+                <Link to={`/editarUsuarios/${user.id}`}
+                    className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800 
+                        flex items-center justify-center py-2'>
+                    <button>Editar</button>
+                </Link>
+
+                <Link to={`/deletarUsuarios/${user.id}`}
+                    className='text-slate-100 bg-red-400 hover:bg-red-700 w-full 
+                        flex items-center justify-center'>
+                    <button>Excluir</button>
+                </Link>
             </div>
 
         </div>

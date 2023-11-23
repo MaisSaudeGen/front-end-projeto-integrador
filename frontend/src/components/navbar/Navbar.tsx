@@ -45,8 +45,11 @@ function Header() {
             </li>
             <li>
               <Link to="/usuarios" className="hover:underline">
-                Usuario
+                Perfil
               </Link>
+            </li>
+            <li>
+            <Link to='/usuarios' className='hover:underline'>Usuários</Link>
             </li>
             <li>
               <button onClick={logout} className="hover:underline rounded px-2">
