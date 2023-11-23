@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import api from "./API";
 import { CriarPost } from "../components/FormCriarPost/FormCriarPost";
-import Postagem from "../model/Postagem";
+import { EdiarPostagem } from "../components/CardPostagem/CardPostagem";
 
 
 export async function buscarPosts() {
@@ -45,7 +45,7 @@ export async function excluirPost(id: number) {
   }
 }
 
-export async function editarPost(post: Postagem) {
+export async function editarPost(post: EdiarPostagem) {
   console.log("Editar chamado")
   try {
     const response = await api.put('/postagem', post)

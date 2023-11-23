@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       return [{} as UsuarioComToken, "400"]
     }
     
-    const payload = { token: response.token, email };
+    const payload = { token: response.token, email , id:response.id };
 
     setUser(payload);
     setUserLocalStorage(payload);

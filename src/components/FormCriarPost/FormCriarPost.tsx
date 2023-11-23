@@ -7,6 +7,8 @@ import { AxiosError } from "axios";
 import { criarPost } from "../../services/postagemService";
 import Categorias from "../../model/Categorias";
 import { pegarCategorias } from "../../services/categoriasService";
+import { buscarUsuarios } from "../../services/UsuarioService";
+import { useAuth } from "../../contexts/authProvider/useAuth";
 
 interface Props {
   setOpen: (isOpen: boolean) => void;
@@ -28,8 +30,56 @@ export interface CriarPost {
 export default function FormCriarPost({ setOpen }: Props) {
   const { recarregar, setRecarregar } = useRecarregarPagina();
   const navigate = useNavigate();
-  const { user } = useUserInfo();
+  const authUser = useAuth()
+  const { user, setUser } = useUserInfo();
   const [categorias, setCategorias] = useState<Categorias[]>([]);
+  
+
+  useEffect(() => {
+    async function fecthDataThemes() {
+      const response = await pegarCategorias();
+
+      if (response instanceof AxiosError) {
+        toastAlert("Erro ao buscar temas " + response, "error", 10000);
+        setOpen(false);
+        return;
+      }
+      console.log(response);
+      setCategorias(response);
+    }
+    fecthDataThemes();
+  }, []);
+
+  useEffect(() => {
+    async function carregarUsuario() {
+      const usuarios = await buscarUsuarios()
+  
+      if( usuarios === null){
+        return "Erro ao buscar usuários, por favor faça login novamente."
+      }
+  
+      if( usuarios instanceof Array) {
+        const usuarioEncontrado = usuarios.find(usuario => usuario.usuario === authUser.user.email)
+        console.log("Usuario encontrado useEffect: ", usuarioEncontrado)
+        if(usuarioEncontrado){
+          setUser(usuarioEncontrado)
+          return usuarioEncontrado
+        } else {
+          throw Error("Usuário não entrado. Faça login de novo!")
+          navigate('/login')
+        }
+      }
+    }
+    console.log("USE EFECT CHAMADO valor de user: ", user)
+
+    if(Object.keys(user).length === 0){
+      console.log("Usuário perdido, buscando info do usuario.")
+      // Buscar todos usuários do back e filtrar para achar o que tem email igual.
+      carregarUsuario()
+    }
+
+  }, [])
+
 
   const [post, setPost] = useState<CriarPost>({
     texto: "", //MIN DE 10 CARACTERES
@@ -40,25 +90,44 @@ export default function FormCriarPost({ setOpen }: Props) {
       id: 0,
     },
     usuario: {
-      id: user.id,
+      id: user.id ,
     },
   });
+  
 
-  async function cadastrarPost(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    console.log("enviado para a api", post);
-
+  function validacoes(){
     if (post.categorias.id == 0) {
       toastAlert("Escolha o tema antes de enviar", "info", 3000);
-      return;
+      return false;
     }
 
     if (!validaTexto(post.texto)) {
       toastAlert("Verifique as regras de cadastro e tente de novo", "info", 3000);
-      return;
+      return false;
     } 
 
+    if (post.usuario.id === undefined) {
+      console.log("Usuario id é undefined, buscando valor de novo.")
+      // tentar recarregar o valor de usuário.
+      setPost(prevPost => ({ ...prevPost, usuario: { id: user.id } }));
+      console.log("novo valor: ", user.id, post.usuario.id)
+      toastAlert("Por favor, tente novamente!", "info", 3000)
+      return false
+    }
+
+    return true
+  }
+
+  async function cadastrarPost(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+
+    if (!validacoes()){
+      return //interrompendo o fluxo
+    }
+
+    console.log("enviado para a api", post);
+    
     const resposta = await criarPost(post);
 
     if (resposta instanceof AxiosError) {
@@ -81,21 +150,6 @@ export default function FormCriarPost({ setOpen }: Props) {
   function validaTexto(texto: string) {
     return texto.length >= 10;
   }
-
-  useEffect(() => {
-    async function fecthDataThemes() {
-      const response = await pegarCategorias();
-
-      if (response instanceof AxiosError) {
-        toastAlert("Erro ao buscar temas " + response, "error", 10000);
-        setOpen(false);
-        return;
-      }
-      console.log(response);
-      setCategorias(response);
-    }
-    fecthDataThemes();
-  }, []);
 
   return (
     <div>
@@ -149,11 +203,19 @@ export default function FormCriarPost({ setOpen }: Props) {
             onChange={(e) =>
               setPost({ ...post, categorias: { id: parseInt(e.target.value) } })
             }
-            required={true}
             className="bg-transparent border rounded-md p-1 mt-2 text-white"
             name="categorias"
             id="categoriaId"
+            
           >
+            <option 
+              className="bg-zinc-600 text-white" 
+              selected
+              disabled
+              value=""
+              >
+              Escolha uma categoria
+            </option>
             {categorias?.map((categoria) => (
               <option
                 className="bg-zinc-600 text-white"

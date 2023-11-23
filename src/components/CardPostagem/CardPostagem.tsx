@@ -8,6 +8,24 @@ import { formatDate } from "../../utils/dateHelper";
 import { editarPost, excluirPost } from "../../services/postagemService";
 import { ConfirmModal } from "../ConfirmModal/ConfirmModal";
 import Skeleton from "react-loading-skeleton";
+import Categorias from "../../model/Categorias";
+
+interface UsuarioID {
+  id: number
+}
+
+export interface EdiarPostagem {
+  id: number
+  texto: string
+  data: string
+  titulo:  string
+  corpo:  string
+  likes: number
+  compartilhamentos: number
+  comentarios: string
+  categorias: Categorias
+  usuario: UsuarioID
+}
 
 export default function CardPostagem({
   id,
@@ -21,7 +39,7 @@ export default function CardPostagem({
   usuario,
   categorias,
 }: Postagem) {
-  const [postagem, setPostagem] = useState<Postagem>({
+  const [postagem, setPostagem] = useState<EdiarPostagem>({
     id,
     titulo,
     corpo,
@@ -44,6 +62,14 @@ export default function CardPostagem({
 
   async function handleEdit() {
     setEditado(!editado);
+
+    const usuarioId = postagem.usuario.id
+
+    postagem.usuario = {"id" : postagem.usuario.id}
+
+    setPostagem({...postagem, usuario: {id: usuarioId}})
+
+    console.log("Enviado para a API: ", postagem)
     const response = await editarPost(postagem);
     console.log("Response: ", response);
   }
