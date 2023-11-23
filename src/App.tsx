@@ -16,7 +16,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import PageCategoriaId from "./pages/CategoriaId";
 import PagePostagens from "./pages/postagens/PagePostagens";
 import { UserInfoProvider } from "./contexts/UserContex/UserContex";
-import ListarUsuario from "./pages/usuario/listarUsuario/ListarUsuario";
+import PageUsuario from "./pages/PageUsuario/PageUsuario";
 
 function App() {
   return (
@@ -34,13 +34,13 @@ function App() {
                 <Route path="/logout" element={<Login />} />
                 <Route path="/sobre" element={<Sobre />} />
                 <Route path="/*" element={<NotFound />} />
-                <Route path="/categorias" element={<PageCategorias />} />
+                <Route path="/temas" element={<PageCategorias />} />
                 <Route
-                  path="/categorias/:idCategoria"
+                  path="/temas/:idCategoria"
                   element={<PageCategoriaId />}
                 />
                 <Route path="/postagens" element={<PagePostagens />} />
-                <Route path="/usuarios" element={<ListarUsuario />} />
+                <Route path="/usuarios" element={<PageUsuario/>} />
                 
               </Routes>
               <Footer />

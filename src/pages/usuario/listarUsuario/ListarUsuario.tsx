@@ -1,60 +1,39 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/authProvider";
-import { buscar } from "../../../services/Services";
 import Usuario from "../../../model/Usuario";
-import PerfilUsuario from "../perfilUsuario/PerfilUsuario";
+import CardUsuario from "../perfilUsuario/PerfilUsuario";
+import { buscarUsuarioPorId } from "../../../services/UsuarioService";
 
 function ListarUsuario() {
+  const [user, setUser] = useState<Usuario>({} as Usuario);
 
-    const [user, setUser] = useState<Usuario[]>([]);
+  const auth = useContext(AuthContext);
 
-    const navigate = useNavigate();
-
-    const  auth  = useContext(AuthContext);
-    const token = auth.user.token;
-
-    async function buscarUsuarios() {
-        try {
-            await buscar('/usuarios', setUser, {
-                headers: { Authorization: token },
-            })
-        } catch (error: any) {
-            if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente')
-                auth.logout()
-            }
+  async function buscarUsuario() {
+    try {
+      if (auth.user.id) {
+        const resposta = await buscarUsuarioPorId(auth.user.id);
+        if (resposta) {
+          setUser(resposta);
         }
+      }
+    } catch (error) {
+      alert("O token expirou, favor logar novamente");
+      auth.logout();
     }
+  }
 
-    useEffect(() => {
-        if (token === '') {
-            alert('Você precisa estar logado');
-            navigate('/login');
-        }
-    }, [token])
+  useEffect(() => {
+    buscarUsuario();
+  }, []);
 
-    useEffect(() => {
-        buscarUsuarios()
-    }, [user.length])
-
-    return (
-        <>
-            <div className="flex justify-center w-full my-4">
-                <div className="container flex flex-col">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                        {user.map((usuario) => (
-                            <>
-                                <PerfilUsuario key={usuario.id} user={usuario} />
-                            </>
-                        ))}
-
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <div className="flex flex-col grow items-center justify-center">
+      <div className="flex w-[500px]">
+        <CardUsuario key={user.id} usuario={user} />
+      </div>
+    </div>
+  );
 }
 
-export default ListarUsuario
+export default ListarUsuario;

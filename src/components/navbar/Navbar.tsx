@@ -26,8 +26,8 @@ function Header() {
         <nav className="flex justify-center items-center">
           <ul className="flex gap-4 justify-center items-center">
             <li>
-              <Link to="/categorias" className="hover:underline">
-                Categorias
+              <Link to="/temas" className="hover:underline">
+                Temas
               </Link>
             </li>
             <li>

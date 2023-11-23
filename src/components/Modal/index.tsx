@@ -10,7 +10,7 @@ interface Props {
 export default function Modal({isOpen, descricao, titulo, children}: Props) {
   if (isOpen){
     return (
-      <div className="bg-blue-900 fixed top-0 right-0 left-0 bottom-0 bg-opacity-70 ">
+      <div className="z-10 bg-blue-900 fixed top-0 right-0 left-0 bottom-0 bg-opacity-70 ">
         <div className="fixed left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%]
           bg-zinc-800 p-8 rounded-xl gap-2
           flex flex-col items-center shadow-2xl border"
