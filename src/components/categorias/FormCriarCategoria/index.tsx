@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { criarCategoria } from "../../../services/categoriasService";
 import { AxiosError } from "axios";
 import toastAlert from "../../../utils/toastAlert";
@@ -41,7 +41,6 @@ export default function FormCriarCategoria({ setOpen }: Props) {
     toastAlert("Categoria criado com sucesso!", "sucesso");
     setOpen(false);
     setRecarregar(!recarregar);
-    console.log({ email, senha: "protected" });
   }
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
