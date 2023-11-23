@@ -4,11 +4,11 @@ import logo from "../../assets/images/login/login.png";
 
 function Header() {
   const navigate = useNavigate();
-  const auth = useAuth();
-  const exibir = auth.token ? "" : "hidden";
+  const {logout, user} = useAuth();
+  const exibir = user.token ? "" : "hidden";
 
-  function logout() {
-    auth.logout();
+  function sair() {
+    logout();
     navigate("/login");
   }
 
@@ -44,7 +44,7 @@ function Header() {
               </Link>
             </li>
             <li>
-              <button onClick={logout} className="hover:underline rounded px-2">
+              <button onClick={sair} className="hover:underline rounded px-2">
                 Sair
               </button>
             </li>

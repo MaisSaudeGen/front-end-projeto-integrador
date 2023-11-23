@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  ChangeEvent, useState } from "react";
 import userImg from "../../assets/images/default/user.svg";
 import defaultLike from "../../assets/images/like/defaultLike.svg";
 import liked from "../../assets/images/like/liked.svg";
@@ -57,7 +57,7 @@ export default function CardPostagem({
     setCurtida(!curtida);
   }
 
-  function atualizarEstado(e) {
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setPostagem({ ...postagem, [e.target.name]: e.target.value });
   }
   return (
@@ -139,9 +139,9 @@ export default function CardPostagem({
             rounded-md border w-full mt-2 resize-none"
               name="texto"
               id="texto"
-              rows="8"
+              rows={8}
               value={postagem.texto}
-              onChange={(e) => atualizarEstado(e)}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstado(e)}
             />
           ) : (
             <span className="text-white break-words">

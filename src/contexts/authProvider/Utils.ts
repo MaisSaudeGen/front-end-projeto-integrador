@@ -1,13 +1,24 @@
+import { AxiosError } from "axios";
+import Usuario from "../../model/Usuario";
 import api from "../../services/API"
 import { IUser } from "./types"
 
-export async function loginRequest(email: string, password: string) {
+export interface UsuarioComToken extends Usuario {
+  token : string
+}
+
+
+export async function loginRequest(email: string, password: string): Promise<UsuarioComToken | AxiosError | null> {
   try {
     console.log({ email, "senha": "protected" })
     const request = await api.post("/usuarios/logar", { "usuario": email, "senha": password },);
-    return request.data;
+    console.log(request)
+    return request.data ;
   } catch (error) {
-    return error;
+    if (error instanceof AxiosError) {
+      return error;
+    }
+    return null;
   }
 }
 

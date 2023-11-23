@@ -27,7 +27,7 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
     console.log(response);
   }
 
-  function recarregarEstado(e: ChangeEvent<HTMLInputElement>) {
+  function recarregarEstado(e: ChangeEvent<HTMLInputElement| HTMLTextAreaElement>) {
     setCategoria({ ...categoria, [e.target.name]: e.target.value });
   }
 
@@ -52,7 +52,7 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
           rows={4}
           name="nome"
           value={categoria.nome}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
             recarregarEstado(e);
           }}
         />
@@ -70,7 +70,7 @@ function CardCategorias({ id, nome, descricao }: Categorias) {
           rows={4}
           name="descricao"
           value={categoria.descricao}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
              recarregarEstado(e)
           }}
         />

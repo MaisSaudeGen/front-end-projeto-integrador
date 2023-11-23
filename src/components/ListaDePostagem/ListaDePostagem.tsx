@@ -3,6 +3,8 @@ import { buscarPosts } from "../../services/postagemService";
 import Postagem from "../../model/Postagem";
 import CardPostagem from "../CardPostagem/CardPostagem";
 import { useRecarregarPagina } from "../../contexts/recarregarPagina/useRecarregarPagina";
+import Categorias from "../../model/Categorias";
+import Usuario from "../../model/Usuario";
 
 export default function ListaDePostagem() {
   const [posts, setPosts] = useState<Postagem[]>([]);
@@ -21,7 +23,7 @@ export default function ListaDePostagem() {
         Array(6)
           .fill("")
           .map((_, index) => (
-            <CardPostagem key={index} id={0} texto={""} data={""} titulo={""} corpo={""} likes={0} compartilhamentos={0} comentarios={""} categorias={undefined} usuario={undefined}/>
+            <CardPostagem key={index} id={0} texto={""} data={""} titulo={""} corpo={""} likes={0} compartilhamentos={0} comentarios={""} categorias={{} as Categorias} usuario={{} as Usuario}/>
           ))}
       {posts.map((post) => (
         <CardPostagem key={post.id} {...post} />

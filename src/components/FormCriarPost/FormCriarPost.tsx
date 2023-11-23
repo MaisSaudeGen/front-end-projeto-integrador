@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRecarregarPagina } from "../../contexts/recarregarPagina/useRecarregarPagina";
 import { useNavigate } from "react-router-dom";
 import toastAlert from "../../utils/toastAlert";
@@ -12,56 +12,57 @@ interface Props {
   setOpen: (isOpen: boolean) => void;
 }
 
-export interface CriarPost{
-  texto: string
-  data: string //2023-11-21T11:51:41.815Z,
-  titulo: string //string padrão
-  corpo: string
+export interface CriarPost {
+  texto: string;
+  data: string; //2023-11-21T11:51:41.815Z,
+  titulo: string; //string padrão
+  corpo: string;
   categorias: {
-    id: number
-  },
+    id: number;
+  };
   usuario: {
-    id: number
-  }
+    id: number;
+  };
 }
 
 export default function FormCriarPost({ setOpen }: Props) {
   const { recarregar, setRecarregar } = useRecarregarPagina();
   const navigate = useNavigate();
-  const {user} = useUserInfo()
+  const { user } = useUserInfo();
   const [categorias, setCategorias] = useState<Categorias[]>([]);
 
   const [post, setPost] = useState<CriarPost>({
     texto: "", //MIN DE 10 CARACTERES
     data: new Date().toISOString(), //2023-11-21T11:51:41.815Z,
-    titulo: "", 
+    titulo: "",
     corpo: "null",
     categorias: {
-      id: 0
+      id: 0,
     },
     usuario: {
-      id: user.id
-    }
+      id: user.id,
+    },
   });
-
 
   async function cadastrarPost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log("enviado para a api",post)
+    console.log("enviado para a api", post);
 
-    if(post.categorias.id == 0) {
-      toastAlert('Escolha o tema antes de enviar', "info", 3000)
-      return
+    if (post.categorias.id == 0) {
+      toastAlert("Escolha o tema antes de enviar", "info", 3000);
+      return;
     }
+
+    if (!validaTexto(post.texto)) {
+      toastAlert("Verifique as regras de cadastro e tente de novo", "info", 3000);
+      return;
+    } 
 
     const resposta = await criarPost(post);
 
     if (resposta instanceof AxiosError) {
-      toastAlert(
-        "Não foi possível criar a post: " + resposta.message,
-        "erro"
-      );
+      toastAlert("Não foi possível criar a post: " + resposta.message, "erro");
       if (resposta.message.includes("401")) {
         navigate("/login");
       }
@@ -71,8 +72,14 @@ export default function FormCriarPost({ setOpen }: Props) {
     setRecarregar(!recarregar);
   }
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+  function atualizarEstado(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setPost({ ...post, [e.target.name]: e.target.value });
+  }
+
+  function validaTexto(texto: string) {
+    return texto.length >= 10;
   }
 
   useEffect(() => {
@@ -88,9 +95,7 @@ export default function FormCriarPost({ setOpen }: Props) {
       setCategorias(response);
     }
     fecthDataThemes();
-
   }, []);
-
 
   return (
     <div>
@@ -114,14 +119,13 @@ export default function FormCriarPost({ setOpen }: Props) {
             type="text"
           />
         </div>
-        <div className="flex flex-col w-full ">
+        <div className="flex flex-col w-full break-words ">
           <label className="text-white" htmlFor="">
             Texto:
           </label>
           <textarea
             required
             rows={4}
-            
             id="texto"
             name="texto"
             value={post.texto}
@@ -130,20 +134,32 @@ export default function FormCriarPost({ setOpen }: Props) {
             }}
             className="rounded-md resize-none focus:outline-none focus:ring"
           />
+          {!validaTexto(post.texto) && post.texto && (
+            <>
+              <span className="text-red-500 pt-1">Digite ao menos 10</span>
+              <span className="text-red-500">caracteceres para o titulo</span>
+            </>
+          )}
         </div>
         <div className="flex flex-col w-full ">
           <label className="text-white" htmlFor="">
             Selecione o tema:
           </label>
           <select
-            onChange={(e) => setPost({...post, categorias: {"id": e.target.value} })}
+            onChange={(e) =>
+              setPost({ ...post, categorias: { id: parseInt(e.target.value) } })
+            }
             required={true}
             className="bg-transparent border rounded-md p-1 mt-2 text-white"
             name="categorias"
             id="categoriaId"
           >
             {categorias?.map((categoria) => (
-              <option className="bg-zinc-600 text-white" key={categoria.id} value={categoria.id}>
+              <option
+                className="bg-zinc-600 text-white"
+                key={categoria.id}
+                value={categoria.id}
+              >
                 {categoria.nome}
               </option>
             ))}

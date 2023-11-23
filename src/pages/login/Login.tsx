@@ -1,5 +1,5 @@
 import loginImg from "../../assets/images/login/login.png";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toastAlert from "../../utils/toastAlert";
 import { useAuth } from "../../contexts/authProvider/useAuth";

@@ -1,12 +1,13 @@
-import { User } from "../UserContex/UserContex";
+import { UsuarioComToken } from "./Utils";
 
 export interface IUser {
   email?: string;
   token?: string;
 }
 
-export interface IContext extends IUser {
-  authenticate: (email: string, password: string) => [User, string];
+export interface IContext {
+  user: IUser
+  authenticate: (email: string, password: string) => Promise<[UsuarioComToken, string]>;
   logout: () => void;
 }
 

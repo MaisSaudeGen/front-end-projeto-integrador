@@ -3,8 +3,8 @@ import { useAuth } from "../../contexts/authProvider/useAuth";
 
 
 function Footer() {
-  const auth = useAuth();
-  const exibir = auth.token ? "" : "hidden";
+  const {user} = useAuth();
+  const exibir = user.token ? "" : "hidden";
 
   return (
     <footer
