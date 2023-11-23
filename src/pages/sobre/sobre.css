@@ -10,10 +10,11 @@
 
 .quem-somos {
     font-size: 24px;
+    @apply flex flex-col items-center justify-center
 }
 
 .sobre .membro {
-    @apply bg-white rounded-lg shadow-md p-20;
+    @apply bg-white rounded-lg shadow-xl p-5 hover:scale-105;
 }
 
 .sobre .membro img {
