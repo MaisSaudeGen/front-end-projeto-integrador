@@ -9,6 +9,7 @@ import { editarPost, excluirPost } from "../../services/postagemService";
 import { ConfirmModal } from "../ConfirmModal/ConfirmModal";
 import Skeleton from "react-loading-skeleton";
 import Categorias from "../../model/Categorias";
+import { useUserInfo } from "../../contexts/UserContex/useUserInfo";
 
 interface UsuarioID {
   id: number
@@ -51,6 +52,7 @@ export default function CardPostagem({
     usuario,
     categorias,
   });
+  const { user } = useUserInfo()
   const [editado, setEditado] = useState(false);
   const [mostarModal, setMostrarModal] = useState(false);
   const [deletado, setDeletado] = useState(false);
@@ -100,7 +102,12 @@ export default function CardPostagem({
           className="flex items-center justify-between border-b border-zinc-300 pb-2 gap-2"
         >
           <div className="flex gap-2">
-            <img src={userImg} alt="" />
+            <img 
+            src={usuario.foto || userImg} 
+            className="w-[80px] h-[80px] border rounded-full object-cover" 
+            
+            alt="Imagem do usuário" 
+            />
             {usuario ? (
               <ul>
                 <li>
@@ -219,7 +226,8 @@ export default function CardPostagem({
           </div>
         </div>
         <div id="Cometar" className="flex gap-2">
-          <img src={userImg} width="40px" alt="" />
+          <img src={user.foto ||userImg} 
+          className="w-[50px] h-[50px] border rounded-full object-cover" alt="" />
           <input
             type="text"
             placeholder="Adicionar comentário"

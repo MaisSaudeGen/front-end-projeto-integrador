@@ -12,10 +12,10 @@ export default function PageCategorias() {
   //Criar um botão de voltar quando usuario pesquisar algo?
   return (
     <CategoriaPesquisadaProvider>
-      <section className="flex py-6 gap-4 items-center justify-center bg-black bg-opacity-30">
+      <section className="mt-20 flex flex-col sm:flex-row py-6 gap-4 items-center justify-center bg-black bg-opacity-30">
         <button
           onClick={() => setOpen(!open)}
-          className="text-white border p-4 rounded-md shadow-md bg-black bg-opacity-40 hover:bg-blue-400"
+          className="text-white border p-4 px-[5rem] rounded-md shadow-md bg-black bg-opacity-40 hover:bg-blue-400"
          >
           Criar nova categoria
         </button>
