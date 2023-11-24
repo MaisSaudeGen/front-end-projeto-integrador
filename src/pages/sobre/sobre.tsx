@@ -1,5 +1,4 @@
 import React from "react";
-import "./sobre.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import beatrizImage from "../../assets/images/sobre/Beatriz.jpeg";
