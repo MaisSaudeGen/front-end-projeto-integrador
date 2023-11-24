@@ -66,13 +66,15 @@ const membros = [
 
 const MembroComponent: React.FC<MembroProps> = ({ membro }) => {
   return (
-    <div className="membro flex justify-around items-center gap-2 text-center m-2">
+    <div className="bg-blue-100 rounded-lg shadow-xl p-5 hover:scale-105 
+      flex justify-around items-center gap-2 text-center m-2
+      
+      ">
       <div className="rounded-full overflow-hidden w-32 h-32">
         <img
           src={membro.foto}
           alt={`Foto de ${membro.nome}`}
           className="w-full h-full object-cover object-center"
-          style={{ objectPosition: "50% 50%" }}
         />
       </div>
       <div className="text-left mt-2">
@@ -102,10 +104,10 @@ const MembroComponent: React.FC<MembroProps> = ({ membro }) => {
 
 const Sobre: React.FC = () => {
   return (
-    <section className="sobre">
-      <div className="quem-somos gap-2">
+    <section className="gap-20 p-2 flex flex-col items-center justify-center pt-[90px]">
+      <div className="flex flex-col items-center justify-center gap-4 mt-2">
         <p className="text-white font-bold text-4xl">Quem somos</p>
-        <div className="texto-introdutorio mt-4 text-base text-gray-700 text-center bg-blue-100 p-4 rounded mb-6 shadow-md">
+        <div className="texto-introdutorio text-base text-gray-700 text-center bg-blue-100 p-4 rounded shadow-md">
           <p className="text-justify max-w-[750px]">
             Bem-vindo(a) à Mais Saúde, a plataforma que une tecnologia e saúde
             para promover o bem-estar psicossocial e contribuir para a
@@ -127,7 +129,7 @@ const Sobre: React.FC = () => {
             <MembroComponent key={membro.nome} membro={membro} />
           ))}
         </div>
-        <a href="/" className="bg-blue-600 mt-6 rounded-md p-2 text-white shadow-lg hover:scale-105">
+        <a href="/" className="bg-blue-600 my-6 rounded-md py-2 px-4 font-bold text-white shadow-lg hover:scale-105">
           Voltar a página principal
         </a>
       </div>
