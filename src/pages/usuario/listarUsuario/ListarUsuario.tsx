@@ -29,7 +29,7 @@ function ListarUsuario() {
 
   return (
     <div className="flex flex-col grow items-center justify-center">
-      <div className="flex w-[500px]">
+      <div className="flex max-w-[500px]">
         <CardUsuario key={user.id} usuario={user} />
       </div>
     </div>
