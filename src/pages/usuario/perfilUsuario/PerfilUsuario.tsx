@@ -92,12 +92,12 @@ export default function CardUsuario({ usuario }: Props) {
             {editado? "Salvar" : "Editar"}
           </button>
 
-          <button
+          {/* <button
             className="text-slate-100 bg-red-400 hover:bg-red-700 w-full 
                         flex items-center justify-center"
           >
             Excluir
-          </button>
+          </button> */}
         </div>
       </div>
       {/* <Modal 
